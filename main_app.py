@@ -21,7 +21,11 @@ def predict(image, labels, model):
     y_prob = torch.nn.functional.softmax(outputs.squeeze(0), dim=-1)
     sorted_prob, sorted_indices = torch.sort(y_prob, descending=True)
 
-    return [(labels[idx], prob.item()) for idx, prob in zip(sorted_prob[0], sorted_indices[0])] 
+    results = []
+    for prob, idx in zip(sorted_prob, sorted_indices):
+        results.append((labels[idx.item()], prob.item()))
+
+    return results
     
 
 def main():
