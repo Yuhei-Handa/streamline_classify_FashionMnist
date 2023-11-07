@@ -28,7 +28,9 @@ def main():
     model = Resnet(num_classes=10)
     model.load_state_dict(torch.load("model.pth", map_location='cpu'))
 
-    f = open("labels.txt", "r")
+    with open("labels.txt", "r") as f:
+        labels = [line.strip() for line in f.readlines()]
+    
     labels = f.readlines()
     st.sidebar.title("衣服の画像認識アプリ")
     st.sidebar.write("画像認識モデルを使って衣服の種類を判定します。")
