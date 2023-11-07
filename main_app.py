@@ -4,9 +4,12 @@ import torchvision
 from model import Resnet
 from PIL import Image
 
-def predict(image, labels,  model):
+def predict(image, labels, model):
+            
     transform = torchvision.transforms.Compose([
-        torchvision.transforms.CenterCrop(224), torchvision.transforms.ToTensor()
+        torchvision.transforms.CenterCrop(224),
+        torchvision.transforms.Grayscale(num_output_channels=1),
+        torchvision.transforms.ToTensor() 
     ])
 
     image = transform(image)
@@ -17,6 +20,7 @@ def predict(image, labels,  model):
 
     y_prob = torch.nn.Softmax(outputs)
     sorted_prob, sorted_indices = torch.sort(y_prob, descending=True)
+
     return [(labels[idx], prob.item()) for idx, prob in zip(sorted_prob, sorted_indices)] 
     
 
@@ -45,14 +49,6 @@ def main():
             st.image(img, caption="対象画像")
             st.write("")
 
-            transform = torchvision.transforms.Compose([
-               torchvision.transforms.CenterCrop(224),
-               torchvision.transforms.Grayscale(num_output_channels=1),
-               torchvision.transforms.ToTensor() 
-            ])
-
-            img = transform(img)
-
             results = predict(img, labels, model)
 
             st.subheader("判定結果")
@@ -60,13 +56,13 @@ def main():
             for result in results[:num_top]:
                 st.write(str(round(result[1] * 100, 2)) + "%の確率で" + result[0] + "です。")
 
-st.sidebar.write("")
-st.sidebar.write("")
+    st.sidebar.write("")
+    st.sidebar.write("")
 
-st.sidebar.caption('"このアプリは[FashionMnist]を訓練データとして扱っています \n \
-                   Copyright (c) 2017 Zalando SE \n \
-                   Released under the MIT license \n \
-                   https://github.com/zalandoresearch/fashion-mnist#license"')
+    st.sidebar.caption('"このアプリは[FashionMnist]を訓練データとして扱っています \n \
+                       Copyright (c) 2017 Zalando SE \n \
+                       Released under the MIT license \n \
+                       https://github.com/zalandoresearch/fashion-mnist#license"')
 
 
 
