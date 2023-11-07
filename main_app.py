@@ -3,6 +3,7 @@ import torch
 import torchvision
 from model import Resnet
 from PIL import Image
+import matplotlib.pyplot as plt
 
 def predict(image, labels, model):
             
@@ -60,6 +61,19 @@ def main():
             num_top = 5
             for result in results[:num_top]:
                 st.write(str(round(result[1] * 100, 2)) + "%の確率で" + result[0] + "です。")
+
+            pie_labels = [result[0] for result in results[:num_top]]
+            pie_labels.appned("Other")
+            pie_probs = [result[1] for result in results[:num_top]]
+            pie_probs.appned(sum([result[1] for result in results]))
+
+            fig, ax = plt.subplots()
+            wedgeprops = {"width":0.3, "edgecolor":"white"}
+            textprops = {"fontsize":6}
+            ax.pie(pie_probs, labels=pie_labels, counterclocke=False, startangle=90,
+                   textprops=textprops, autopct="%.2f", wedgeprops=wedgeprops)
+            st.pyplot(fig)
+
 
     st.sidebar.write("")
     st.sidebar.write("")
