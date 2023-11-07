@@ -46,8 +46,8 @@ def main():
             st.write("")
 
             transform = torchvision.transforms.Compose([
-               torchvision.transforms.Grayscale(),
                torchvision.transforms.CenterCrop(224),
+               torchvision.transforms.Grayscale(num_output_channels=1),
                torchvision.transforms.ToTensor() 
             ])
 
