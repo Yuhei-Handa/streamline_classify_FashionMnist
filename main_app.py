@@ -34,9 +34,7 @@ def main():
 
     with open("labels.txt", "r") as f:
         labels = [line.strip() for line in f.readlines()]
-    
-    st.set_option('deprecation.showfileUploaderEncoding', False)
-    import matplotlib.pyplot as plt
+
     st.sidebar.title("衣服の画像認識アプリ")
     st.sidebar.write("画像認識モデルを使って衣服の種類を判定します。")
 
@@ -62,18 +60,6 @@ def main():
             num_top = 5
             for result in results[:num_top]:
                 st.write(str(round(result[1] * 100, 2)) + "%の確率で" + result[0] + "です。")
-
-            pie_labels = [result[0] for result in results[:num_top]]
-            pie_labels.appned("Other")
-            pie_probs = [result[1] for result in results[:num_top]]
-            pie_probs.appned(sum([result[1] for result in results]))
-
-            fig, ax = plt.subplots()
-            wedgeprops = {"width":0.3, "edgecolor":"white"}
-            textprops = {"fontsize":6}
-            ax.pie(pie_probs, labels=pie_labels, counterclocke=False, startangle=90,
-                   textprops=textprops, autopct="%.2f", wedgeprops=wedgeprops)
-            st.pyplot(fig)
 
 
     st.sidebar.write("")
