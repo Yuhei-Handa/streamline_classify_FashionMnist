@@ -1,4 +1,4 @@
-torch
-torchvision
-pillow
-streamlit
+torch==2.0.1+cu117
+torchvision==0.15.2+cu117
+pillow=9.3.0
+streamlit==1.28.1
