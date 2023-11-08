@@ -3,7 +3,6 @@ import torch
 import torchvision
 from model import Resnet
 from PIL import Image
-import matplotlib.pyplot as plt
 
 def predict(image, labels, model):
             
