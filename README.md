@@ -10,3 +10,7 @@
 
 [衣服の画像認識アプリ](https://streamlineclassifyfashionmnist-mi48g9vzsvcyo5vwfd5utu.streamlit.app/)
 
+
+![image](https://github.com/Yuhei-Handa/streamline_classify_FashionMnist/assets/135846516/73c1a5b3-c6b8-42b7-a659-f1e3a8f01a64)
+
+
