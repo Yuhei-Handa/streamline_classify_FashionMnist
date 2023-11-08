@@ -37,6 +37,7 @@ def main():
         labels = [line.strip() for line in f.readlines()]
     
     st.set_option('deprecation.showfileUploaderEncoding', False)
+    import matplotlib.pyplot as plt
     st.sidebar.title("衣服の画像認識アプリ")
     st.sidebar.write("画像認識モデルを使って衣服の種類を判定します。")
 
