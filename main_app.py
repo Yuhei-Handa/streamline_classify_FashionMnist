@@ -37,7 +37,10 @@ def main():
 
     st.sidebar.title("衣服の画像認識アプリ")
     st.sidebar.write("画像認識モデルを使って衣服の種類を判定します。")
-
+    st.sidebar.write("判別が可能な種類は以下の通りです。")
+    for label in labels:
+        st.sidebar.write(f"{label}")
+        
     st.sidebar.write("")
 
     img_source = st.sidebar.radio("画像のソースを選択してください",
